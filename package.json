@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.0.1",
+  "private": true,
   "description": "The front-end for Marvin 2.",
   "repository": {
     "type": "git",
