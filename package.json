@@ -1,0 +1,16 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "description": "The front-end for Marvin 2.",
+  "repository": {
+    "type": "git",
+    "url": "git@git.mobcastdev.com:Marvin/frontend.git"
+  },
+  "author": "Alex Andrews <alexa@blinkbox.com>",
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "grunt": "^0.4.5",
+    "karma": "^0.12.28",
+    "protractor": "^1.5.0"
+  }
+}
