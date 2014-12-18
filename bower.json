@@ -5,7 +5,6 @@
     "Alex <alex@recordsonribs.com>"
   ],
   "description": "The front-end for Marvin 2.",
-  "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
