@@ -48,7 +48,7 @@ module.exports = function(grunt){
       }
     },
 
-    // Simple web server
+    // Simple web server in order to run test.
     connect: {
       options: {
         port: 8000,
@@ -57,6 +57,8 @@ module.exports = function(grunt){
         base: './'
       },
       server: {},
+
+      // Run local development version.
       serve: {
         options: {
           keepalive: true
