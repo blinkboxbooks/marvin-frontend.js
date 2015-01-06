@@ -1,11 +1,13 @@
 'use strict';
 
 // All JS source files we want to check.
-var allSources = ['Gruntfile.js', 'karma.conf.js', 'app/**/*.js'];
+var allSources = ['Gruntfile.js', 'karma.conf.js', 'e2e-tests/**/*.js', 'app/**/*.js'];
 
 module.exports = function(grunt){
   // Use Just In Time Grunt to prevent loading all modules via grunt.loadNpmTask(*) on every run.
-  require('jit-grunt')(grunt);
+  require('jit-grunt')(grunt, {
+    protractor: 'grunt-protractor-runner'
+  });
 
   grunt.initConfig({
     // Run Karma to run Jasmine unit test.
@@ -15,6 +17,14 @@ module.exports = function(grunt){
         singleRun: true
       },
       unit: {}
+    },
+
+    // Run Protractor end to end tests.
+    protractor: {
+      options: {
+        configFile: 'e2e-tests/protractor.conf.js'
+      },
+      all: {}
     },
 
     // Lint all files for JS style violations.
@@ -40,7 +50,7 @@ module.exports = function(grunt){
   });
 
   // Run all tests.
-  grunt.registerTask('test', ['lintspaces', 'jshint', 'karma:unit']);
+  grunt.registerTask('test', ['lintspaces', 'jshint', 'karma:unit', 'protractor']);
 
   // Test and build application.
   grunt.registerTask('build', ['test']);

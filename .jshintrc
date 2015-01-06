@@ -23,6 +23,7 @@
   "globals": {
     "angular": false,
     "app": true,
-    "Marvin": true
+    "Marvin": true,
+    "browser": true
   }
 }
