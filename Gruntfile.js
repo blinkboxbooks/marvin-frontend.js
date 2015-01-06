@@ -61,9 +61,21 @@ module.exports = function(grunt){
       // Run local development version.
       serve: {
         options: {
-          keepalive: true
+          keepalive: true,
+          port: 7000,
+          open: true,
+          livereload: true
         }
       }
+    },
+
+    watch: {
+      options: {
+        livereload: true,
+        spawn: true
+      },
+      files: allSources,
+      tasks: ['test']
     }
   });
 
