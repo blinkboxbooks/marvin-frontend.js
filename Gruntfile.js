@@ -10,6 +10,7 @@ module.exports = function(grunt){
   });
 
   grunt.initConfig({
+
     // Run Karma to run Jasmine unit test.
     karma: {
       options: {
@@ -69,6 +70,7 @@ module.exports = function(grunt){
       }
     },
 
+    // Run a watch that recompiles the application and runs the tests.
     watch: {
       options: {
         livereload: true,
