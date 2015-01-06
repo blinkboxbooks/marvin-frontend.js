@@ -46,11 +46,27 @@ module.exports = function(grunt){
       all: {
         src: allSources
       }
+    },
+
+    // Simple web server
+    connect: {
+      options: {
+        port: 8000,
+        hostname: 'localhost',
+        protocol: 'https',
+        base: './'
+      },
+      server: {},
+      local: {
+        options: {
+          keepalive: true
+        }
+      }
     }
   });
 
   // Run all tests.
-  grunt.registerTask('test', ['lintspaces', 'jshint', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['lintspaces', 'jshint', 'connect:server', 'karma:unit', 'protractor']);
 
   // Test and build application.
   grunt.registerTask('build', ['test']);
