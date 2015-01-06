@@ -57,7 +57,7 @@ module.exports = function(grunt){
         base: './'
       },
       server: {},
-      local: {
+      serve: {
         options: {
           keepalive: true
         }
