@@ -2,6 +2,5 @@
 
 angular.module('Marvin.Services', []);
 
-/*jshint unused:false*/
-var Marvin = angular.module('Marvin', ['Marvin.Services']);
+angular.module('Marvin', ['Marvin.Services']);
 
