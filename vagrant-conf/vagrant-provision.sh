@@ -23,3 +23,10 @@ yum install xorg-x11-server-Xvfb-1.15.0 firefox-31.1.0-5.el6.centos -y
 # Required for headless Firefox.
 Xvfb :1 -screen 0 1280x768x24 &
 echo "export DISPLAY=:1;export BUILD_NUMBER=$1" >>/etc/bashrc
+
+# Install all Node modules.
+cd /vagrant/ && npm install && bower install --allow-root
+
+# Install Protractor version of Selenium Webdriver
+/vagrant/node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update
+
