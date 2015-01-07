@@ -24,6 +24,7 @@
     "angular": false,
     "app": true,
     "Marvin": true,
-    "browser": true
+    "browser": true,
+    "inject": true
   }
 }

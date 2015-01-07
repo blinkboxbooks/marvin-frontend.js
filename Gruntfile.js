@@ -77,7 +77,7 @@ module.exports = function(grunt){
         spawn: true
       },
       files: allSources,
-      tasks: ['test']
+      tasks: ['ci-test']
     }
   });
 
