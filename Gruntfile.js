@@ -20,6 +20,11 @@ module.exports = function(grunt){
       unit: {}
     },
 
+    'bower-install-simple': {
+      options: {},
+      all: {}
+    },
+
     // Run Protractor end to end tests.
     protractor: {
       options: {
@@ -81,15 +86,18 @@ module.exports = function(grunt){
     }
   });
 
+  // Lint files.
+  grunt.registerTask('lint', ['lintspaces', 'jshint']);
+
   // Run all tests.
-  grunt.registerTask('test', ['lintspaces', 'jshint', 'connect:server', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['install-dependencies', 'lint', 'connect:server', 'karma:unit', 'protractor']);
 
   // Run the CI tests - at the moment excluding the end to end tests.
-  grunt.registerTask('ci-test', ['lintspaces', 'jshint', 'connect:server', 'karma:unit']);
+  grunt.registerTask('ci-test', ['install-dependencies', 'lint', 'connect:server', 'karma:unit']);
 
   // Test and build application.
-  grunt.registerTask('build', ['test']);
+  grunt.registerTask('install-dependencies', ['bower-install-simple']);
 
   // Default task.
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('default', ['test', 'build']);
 };
