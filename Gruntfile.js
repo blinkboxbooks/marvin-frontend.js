@@ -70,7 +70,7 @@ module.exports = function(grunt){
       }
     },
 
-    // Run a watch that recompiles the application and runs the tests.
+    // Run a watch that re-compiles the application and runs the tests.
     watch: {
       options: {
         livereload: true,
