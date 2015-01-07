@@ -27,6 +27,6 @@ echo "export DISPLAY=:1;export BUILD_NUMBER=$1" >>/etc/bashrc
 # Install all Node modules.
 cd /vagrant/ && npm install && bower install --allow-root
 
-# Install Protractor version of Selenium Webdriver
-/vagrant/node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update
+# Install Protractor version of Selenium Webdriver.
+/vagrant/node_modules/grunt-protractor-runner/scripts/webdriver-manager-update
 

@@ -84,6 +84,9 @@ module.exports = function(grunt){
   // Run all tests.
   grunt.registerTask('test', ['lintspaces', 'jshint', 'connect:server', 'karma:unit', 'protractor']);
 
+  // Run the CI tests - at the moment excluding the end to end tests.
+  grunt.registerTask('ci-test', ['lintspaces', 'jshint', 'connect:server', 'karma:unit']);
+
   // Test and build application.
   grunt.registerTask('build', ['test']);
 
