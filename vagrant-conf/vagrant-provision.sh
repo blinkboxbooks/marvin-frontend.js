@@ -17,9 +17,9 @@ service nginx start
 # -------------------------------------------------------------------------
 chown -R vagrant:vagrant /usr/local/rvm/gems/*
 
-# Install specific packages that are known to work with our test setup:
+# Install specific packages for headless Firefox testing with Protractor.
 yum install xorg-x11-server-Xvfb-1.15.0 firefox-31.1.0-5.el6.centos -y
 
-# required for headless firefox
+# Required for headless Firefox.
 Xvfb :1 -screen 0 1280x768x24 &
 echo "export DISPLAY=:1;export BUILD_NUMBER=$1" >>/etc/bashrc
