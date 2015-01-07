@@ -4,7 +4,6 @@
 var allSources = ['Gruntfile.js', 'karma.conf.js', 'e2e-tests/**/*.js', 'app/**/*.js'];
 
 module.exports = function(grunt){
-  
   // Use Just In Time Grunt to prevent loading all modules via grunt.loadNpmTask(*) on every run.
   require('jit-grunt')(grunt, {
     protractor: 'grunt-protractor-runner'
