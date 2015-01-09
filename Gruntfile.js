@@ -49,6 +49,13 @@ module.exports = function(grunt){
       }
     },
 
+    bootlint: {
+      options: {
+        stoponerror: true
+      },
+      files: ['**.html']
+    },
+
     // Simple web server in order to run test.
     connect: {
       options: {
@@ -82,7 +89,7 @@ module.exports = function(grunt){
   });
 
   // Lint files.
-  grunt.registerTask('lint', ['lintspaces', 'jshint']);
+  grunt.registerTask('lint', ['bootlint', 'lintspaces', 'jshint']);
 
   // Run all tests.
   grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor']);

@@ -29,5 +29,8 @@
     "karma-jasmine": "^0.3.4",
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-safari-launcher": "^0.1.1"
+  },
+  "dependencies": {
+    "grunt-bootlint": "^0.6.0"
   }
 }
