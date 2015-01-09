@@ -5,7 +5,7 @@ describe('IMS service', function(){
 
   var IMS;
 
-  beforeEach(module('Marvin'));
+  beforeEach(module('Marvin.Services'));
 
   beforeEach(inject(function(_IMS_, _$httpBackend_){
     $httpBackend = _$httpBackend_;
