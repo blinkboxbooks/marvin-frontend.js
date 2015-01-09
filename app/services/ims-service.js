@@ -5,13 +5,13 @@ angular.module('Marvin.Services')
   var url = 'http://localhost';
 
   /**
-   * Searches for a query from IMS.
-   *
-   * @param query A valid Lucene query against the database.
-   * @param count The number of results to be returned.
-   * @param offset The offset.
-   * @returns {HttpPromise}
-   */
+  * Searches for a query from IMS.
+  *
+  * @param query A valid Lucene query against the database.
+  * @param count The number of results to be returned.
+  * @param offset The offset.
+  * @returns {HttpPromise}
+  */
   function search(query, count, offset){
     var paramString = [];
 
