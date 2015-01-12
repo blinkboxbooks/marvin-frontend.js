@@ -1,6 +1,9 @@
 'use strict';
 
-var networkAddress = require('os').networkInterfaces().en0.filter(function(i){ return i.family === 'IPv4'; })[0].address;
+var networkAddress = require('os').networkInterfaces();
+// en0.filter(function(i){ return i.family === 'IPv4'; })[0].address;
+
+console.log(networkAddress);
 
 // All JS source files we want to check.
 var allSources = ['Gruntfile.js', 'karma.conf.js', 'e2e-tests/**/*.js', 'app/**/*.js'];
