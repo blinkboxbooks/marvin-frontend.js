@@ -3,11 +3,11 @@
 var interfaces = require('os').networkInterfaces();
 var info;
 
-if (typeof(networkAddress.en0) !== 'undefined'){
-  info = networkAddress.en0;
+if (typeof(interfaces.en0) !== 'undefined'){
+  info = interfaces.en0;
 }
 else {
-  info = networkAddress.eth0;
+  info = interfaces.eth0;
 }
 
 var networkAddress = info.filter(function(i){ return i.family === 'IPv4'; })[0].address;
