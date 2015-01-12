@@ -1,5 +1,7 @@
 'use strict';
 
+var networkAddress = require('os').networkInterfaces().en0.filter(function(i){ return i.family === 'IPv4'; })[0].address;
+
 // All JS source files we want to check.
 var allSources = ['Gruntfile.js', 'karma.conf.js', 'e2e-tests/**/*.js', 'app/**/*.js'];
 
@@ -29,7 +31,8 @@ module.exports = function(grunt){
       'ci-test': {
         options: {
           args: {
-            seleniumAddress: 'http://192.168.17.236:4444/wd/hub'
+            seleniumAddress: 'http://192.168.17.236:4444/wd/hub',
+            baseUrl: 'https://' + networkAddress + ':8000'
           }
         }
       }
