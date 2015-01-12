@@ -29,7 +29,7 @@ module.exports = function(grunt){
       'ci-test': {
         options: {
           args: {
-            seleniumAddress: 'http://192.168.17.238:4444/wd/hub'
+            seleniumAddress: 'http://192.168.17.236:4444/wd/hub'
           }
         }
       }
