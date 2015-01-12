@@ -25,7 +25,14 @@ module.exports = function(grunt){
       options: {
         configFile: 'e2e-tests/protractor.conf.js'
       },
-      all: {}
+      all: {},
+      'ci-test': {
+        options: {
+          args: {
+            seleniumAddress: 'http://192.168.17.238:4444/wd/hub'
+          }
+        }
+      }
     },
 
     // Lint all files for JS style violations.
@@ -95,7 +102,7 @@ module.exports = function(grunt){
   grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor']);
 
   // Run the CI tests - at the moment excluding the end to end tests.
-  grunt.registerTask('ci-test', ['lint', 'connect:server', 'karma:unit']);
+  grunt.registerTask('ci-test', ['lint', 'connect:server', 'karma:unit', 'protractor:ci-test']);
 
   // Default task.
   grunt.registerTask('default', ['test', 'build']);
