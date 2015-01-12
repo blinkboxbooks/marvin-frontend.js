@@ -39,12 +39,13 @@ module.exports = function(grunt){
       options: {
         configFile: 'e2e-tests/protractor.conf.js'
       },
+      local: {},
       all: {},
       'ci-test': {
         options: {
           args: {
             seleniumAddress: 'http://192.168.17.236:4444/wd/hub',
-            baseUrl: 'https://' + networkAddress + ':8000'
+            baseUrl: 'http://' + networkAddress + ':8000'
           }
         }
       }
@@ -83,7 +84,7 @@ module.exports = function(grunt){
       options: {
         port: 8000,
         hostname: 'localhost',
-        protocol: 'https',
+        protocol: 'http',
         base: './'
       },
       server: {},
@@ -114,9 +115,9 @@ module.exports = function(grunt){
   grunt.registerTask('lint', ['bootlint', 'lintspaces', 'jshint']);
 
   // Run all tests.
-  grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor:local']);
 
-  // Run the CI tests - at the moment excluding the end to end tests - protractor:ci-test.
+  // Run the CI tests - at the moment excluding the end to end tests.
   grunt.registerTask('ci-test', ['lint', 'connect:server', 'karma:unit', 'protractor:ci-test']);
 
   // Default task.
