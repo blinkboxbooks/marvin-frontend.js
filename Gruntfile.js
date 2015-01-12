@@ -100,6 +100,25 @@ module.exports = function(grunt){
       }
     },
 
+    // Copy files to folder for creating RPMs.
+    copy: {
+      dist: {
+        files: [
+          {
+            expand: true,
+            dot: false,
+            dest: './dist',
+            src: [
+                'bower_components/**/*',
+                'app/**/*.js',
+                'index.html',
+                '!node_modules/'
+            ]
+          }
+        ]
+      }
+    },
+
     // Run a watch that re-compiles the application and runs the tests.
     watch: {
       options: {
