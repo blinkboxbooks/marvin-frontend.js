@@ -116,8 +116,8 @@ module.exports = function(grunt){
   // Run all tests.
   grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor']);
 
-  // Run the CI tests - at the moment excluding the end to end tests.
-  grunt.registerTask('ci-test', ['lint', 'connect:server', 'karma:unit', 'protractor:ci-test']);
+  // Run the CI tests - at the moment excluding the end to end tests - protractor:ci-test.
+  grunt.registerTask('ci-test', ['lint', 'connect:server', 'karma:unit']);
 
   // Default task.
   grunt.registerTask('default', ['test', 'build']);
