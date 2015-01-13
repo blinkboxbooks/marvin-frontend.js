@@ -97,6 +97,11 @@ describe('Search controller', function(){
     expect(scope.results).toEqual(response);
   });
 
+  it('has no errors when initialising the controller', function(){
+    scope.$apply();
+    expect(scope.errors.length).toEqual(0);
+  });
+
   it('handles errors from the service', function(){
     scope.queryFromForm = 'a book thing that does not exist';
 
