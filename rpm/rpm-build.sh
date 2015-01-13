@@ -17,7 +17,7 @@ rpmdev-setuptree
 
 cd $MARVIN_HOME
 
-# gather MARVIN version and build number
+# gather Marvin version and build number
 MARVIN_FULL_VERSION=$(node -e 'console.log(require("./package").version);')
 MARVIN_VERSION=$MARVIN_FULL_VERSION
 MARVIN_BUILD_NUMBER=$(echo $MARVIN_FULL_VERSION | cut -d'-' -f2)
