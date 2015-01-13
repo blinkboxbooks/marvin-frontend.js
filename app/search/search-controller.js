@@ -10,6 +10,7 @@ angular.module('Marvin.Controllers')
 
       $scope.search = function(){
         $scope.resultsOpen = true;
+        $scope.errors = [];
 
         IMS.search($scope.queryFromForm).then(function(result){
           $scope.results = result.data;

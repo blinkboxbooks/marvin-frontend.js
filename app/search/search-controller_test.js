@@ -118,5 +118,29 @@ describe('Search controller', function(){
     expect(scope.errors.length).toEqual(1);
     expect(scope.errors[0]).toEqual(error);
   });
+
+  it('clears errors before making call to IMS service', function(){
+    scope.queryFromForm = 'a book thing that does not exist';
+
+    // Shunt something onto errors that we are going to clear.
+    scope.errors.push({message: 'This is an error we will clear in scope.search'});
+
+    var deferred = $q.defer();
+    var error = {message: 'Something went sadly wrong.'};
+    deferred.reject(error);
+
+    spyOn(IMS, 'search').and.returnValue(deferred.promise);
+
+    expect(scope.errors.length).toEqual(1);
+
+    scope.search();
+
+    expect(scope.errors.length).toEqual(0);
+
+    // Now resolve the promise to double check we are covering the right bit of code.
+    scope.$apply();
+
+    expect(scope.errors.length).toEqual(1);
+    expect(scope.errors[0]).toEqual(error);
   });
 });
