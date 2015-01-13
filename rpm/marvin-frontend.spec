@@ -24,8 +24,8 @@ Marvin front end based on AngularJS
 ls -l
 
 # client web app
-%{__install} -d %{buildroot}%{_localstatedir}/www/admin
-%{__cp} -r * %{buildroot}%{_localstatedir}/www/admin
+%{__install} -d %{buildroot}%{_localstatedir}/www/marvin-frontend
+%{__cp} -r * %{buildroot}%{_localstatedir}/www/marvin-frontend
 
 %clean
 rm -rf %{buildroot}
@@ -34,4 +34,4 @@ rm -rf %{buildroot}
 
 %files
 %defattr(0644, root, root, 0755)
-%{_localstatedir}/www/admin/*
+%{_localstatedir}/www/marvin-frontend/*
