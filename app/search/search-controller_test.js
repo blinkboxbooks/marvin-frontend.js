@@ -106,7 +106,7 @@ describe('Search controller', function(){
     scope.queryFromForm = 'a book thing that does not exist';
 
     var deferred = $q.defer();
-
+    var error = {message: 'Something went sadly wrong.'};
     deferred.reject({message: 'Something went sadly wrong.'});
 
     spyOn(IMS, 'search').and.returnValue(deferred.promise);
@@ -116,5 +116,7 @@ describe('Search controller', function(){
     scope.$apply();
 
     expect(scope.errors.length).toEqual(1);
+    expect(scope.errors[0]).toEqual(error);
+  });
   });
 });
