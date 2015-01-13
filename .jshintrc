@@ -25,6 +25,8 @@
     "app": true,
     "Marvin": true,
     "browser": true,
-    "inject": true
+    "inject": true,
+    "by": true,
+    "element": true
   }
 }
