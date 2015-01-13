@@ -20,7 +20,8 @@ var allSources = ['Gruntfile.js', 'karma.conf.js', 'e2e-tests/**/*.js', 'app/**/
 module.exports = function(grunt){
   // Use Just In Time Grunt to prevent loading all modules via grunt.loadNpmTask(*) on every run.
   require('jit-grunt')(grunt, {
-    protractor: 'grunt-protractor-runner'
+    protractor: 'grunt-protractor-runner',
+    ngconstant: 'grunt-ng-constant'
   });
 
   grunt.initConfig({
@@ -72,6 +73,7 @@ module.exports = function(grunt){
       }
     },
 
+    // Lint Bootstrap HTML.
     bootlint: {
       options: {
         stoponerror: true
@@ -96,6 +98,19 @@ module.exports = function(grunt){
           port: 7000,
           open: true,
           livereload: true
+        }
+      }
+    },
+
+    // Prepare constants.
+    ngconstant: {
+      build: {
+        options: {
+          dest: 'app/config/constants.js',
+          name: 'Marvin.Constants'
+        },
+        constants: {
+          SERVICES: grunt.file.readJSON('app/config/constants/services.json')
         }
       }
     },
@@ -131,7 +146,7 @@ module.exports = function(grunt){
   });
 
   // Lint files.
-  grunt.registerTask('lint', ['bootlint', 'lintspaces', 'jshint']);
+  grunt.registerTask('lint', ['ngconstant:build', 'bootlint', 'lintspaces', 'jshint']);
 
   // Run all tests.
   grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor:local']);

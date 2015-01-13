@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Marvin.Services')
-  .factory('IMS', function($http){
-  var url = 'http://localhost';
+  .factory('IMS', function($http, SERVICES){
+  var url = SERVICES.IMS;
 
   /**
   * Searches for a query from IMS.
