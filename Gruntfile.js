@@ -122,7 +122,7 @@ module.exports = function(grunt){
           {
             expand: true,
             dot: false,
-            dest: './dist',
+            dest: './src/main/resources/site/',
             src: [
                 'bower_components/**/*',
                 'app/**/*.js',
@@ -147,6 +147,9 @@ module.exports = function(grunt){
 
   // Lint files.
   grunt.registerTask('lint', ['ngconstant:build', 'bootlint', 'lintspaces', 'jshint']);
+
+  // Build.
+  grunt.registerTask('build', ['copy:dist']); // TODO: VERSION file?
 
   // Run all tests.
   grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor:local']);
