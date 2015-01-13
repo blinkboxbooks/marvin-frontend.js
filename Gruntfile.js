@@ -149,7 +149,7 @@ module.exports = function(grunt){
   grunt.registerTask('lint', ['ngconstant:build', 'bootlint', 'lintspaces', 'jshint']);
 
   // Build.
-  grunt.registerTask('build', ['copy:dist']); // TODO: VERSION file?
+  grunt.registerTask('build', ['copy:dist']);
 
   // Run all tests.
   grunt.registerTask('test', ['lint', 'connect:server', 'karma:unit', 'protractor:local']);
