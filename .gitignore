@@ -3,3 +3,8 @@ bower_components
 .idea
 .vagrant
 dist
+
+# Scala stuff
+project/project
+project/target
+target
