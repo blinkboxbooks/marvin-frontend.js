@@ -11,7 +11,7 @@ BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
-Marvin front end based on AngularJS
+Marvin front end based on AngularJS.
 
 %prep
 
