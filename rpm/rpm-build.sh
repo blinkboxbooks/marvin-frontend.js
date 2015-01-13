@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# This script builds an RPM of the admin web app within the web virtual machine and is
-# designed to be triggered after the admin web app has been built and the 'dist' folder has been generated
-#
-# Before this script is executed, the environment variables SWA_REQUIRED_VERSION must be defined with a value of the
-# version and build number of the SWA this version of the MARVIN is compatible with e.g. 1.0.0-42
-# and also the d
-
-source /home/vagrant/.bash_profile;
-
 MARVIN_HOME=../
 RPM_HOME=/tmp/rpmbuild
 
