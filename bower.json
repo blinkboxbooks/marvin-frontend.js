@@ -1,8 +1,8 @@
 {
   "name": "frontend",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "authors": [
-    "Alex <alex@recordsonribs.com>"
+    "Alex <alexa@blinkbox.com>"
   ],
   "description": "The front-end for Marvin 2.",
   "private": true,
