@@ -4,12 +4,18 @@ angular.module('Marvin.Controllers')
   .controller('SearchController', function(IMS, $scope){
       $scope.resultsOpen = false;
       $scope.queryFromForm = '';
-      $scope.results = [];
+
+      $scope.results = {};
+      $scope.errors = [];
 
       $scope.search = function(){
-        IMS.search($scope.queryFromForm).then(function(){
-        });
-
         $scope.resultsOpen = true;
+
+        IMS.search($scope.queryFromForm).then(function(result){
+          $scope.results = result.data;
+        },
+        function(){
+          $scope.errors.push({message: 'Something went sadly wrong.'});
+        });
       };
 });

@@ -62,4 +62,54 @@ describe('Search controller', function(){
 
     expect(IMS.search).toHaveBeenCalled();
   });
+
+  it('calls IMS with specified query', function(){
+    var query = 'hello world';
+    scope.queryFromForm = query;
+
+    var deferred = $q.defer();
+
+    var results = { items: [], lastPage: true};
+
+    deferred.resolve(results);
+
+    spyOn(IMS, 'search').and.returnValue(deferred.promise);
+
+    scope.search();
+
+    expect(IMS.search).toHaveBeenCalledWith(query);
+  });
+
+  it('sets scope variable correctly', function(){
+    scope.queryFromForm = 'hello world';
+
+    var deferred = $q.defer();
+    var response = { items: [], lastPage: true};
+
+    deferred.resolve({data: response});
+
+    spyOn(IMS, 'search').and.returnValue(deferred.promise);
+
+    scope.search();
+
+    scope.$apply();
+
+    expect(scope.results).toEqual(response);
+  });
+
+  it('handles errors from the service', function(){
+    scope.queryFromForm = 'a book thing that does not exist';
+
+    var deferred = $q.defer();
+
+    deferred.reject({message: 'Something went sadly wrong.'});
+
+    spyOn(IMS, 'search').and.returnValue(deferred.promise);
+
+    scope.search();
+
+    scope.$apply();
+
+    expect(scope.errors.length).toEqual(1);
+  });
 });

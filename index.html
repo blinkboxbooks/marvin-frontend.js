@@ -47,6 +47,11 @@
                 </table>
             </div>
         </div>
+        <div class="col-md-12" ng-show="errors.length > 1">
+            <div ng-repeat="error in errors">
+                {{error.message}}
+            </div>
+        </div>
     </div>
 </div>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
