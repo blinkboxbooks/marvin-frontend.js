@@ -5,13 +5,27 @@
                 <label for="query">Search</label>
                 <input type="text" ng-model="queryFromForm" class="form-control" placeholder="Query...">
             </div>
+            <div>
+                <a ng-click="(advancedSearchOpen === true) ? advancedSearchOpen = false : advancedSearchOpen = true"><i class="fa" ng-class="(advancedSearchOpen === true) ? 'fa-angle-up' : 'fa-angle-down';"></i> Advanced Search</a>
+                <div ng-show="advancedSearchOpen">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="bookTitle">Title</label>
+                            <input type="text" ng-model="bookTitle" class="form-control" placeholder="Wuthering Heights"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookTitle">Publisher</label>
+                            <input type="text" ng-model="bookContributors" class="form-control" placeholder="Harper Perennial"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookTitle">Contributors</label>
+                            <input type="text" ng-model="bookContributors" class="form-control" placeholder="Emily Brontë"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <button type="submit" class="btn btn-default">Search</button>
         </form>
-    </div>
-    <div class="col-md-12">
-        <a ng-click="(advancedSearchOpen === true) ? advancedSearchOpen = false : advancedSearchOpen = true"><i class="fa" ng-class="(advancedSearchOpen === true) ? 'fa-angle-up' : 'fa-angle-down';"></i> Advanced Search</a>
-        <div ng-show="advancedSearchOpen">
-        </div>
     </div>
     <div class="col-md-12" ng-show="errors.length > 1">
         <div ng-repeat="error in errors">
