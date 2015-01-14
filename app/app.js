@@ -9,6 +9,9 @@ angular.module('Marvin', ['ngRoute', 'Marvin.Services', 'Marvin.Controllers', 'M
           .when('/', {
             controller: 'SearchController',
             templateUrl: 'app/search/search.html'
+          })
+          .otherwise({
+            redirectTo: '/'
           });
 
       $locationProvider.html5Mode(true);
