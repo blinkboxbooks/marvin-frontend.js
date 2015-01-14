@@ -3,6 +3,7 @@
 angular.module('Marvin.Controllers')
   .controller('SearchController', function(IMS, $scope){
       $scope.resultsOpen = false;
+      $scope.advancedSearchOpen = false;
       $scope.queryFromForm = '';
 
       $scope.results = {};

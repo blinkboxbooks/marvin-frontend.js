@@ -8,6 +8,11 @@
             <button type="submit" class="btn btn-default">Search</button>
         </form>
     </div>
+    <div class="col-md-12">
+        <a ng-click="(advancedSearchOpen === true) ? advancedSearchOpen = false : advancedSearchOpen = true"><i class="fa" ng-class="(advancedSearchOpen === true) ? 'fa-angle-up' : 'fa-angle-down';"></i> Advanced Search</a>
+        <div ng-show="advancedSearchOpen">
+        </div>
+    </div>
     <div class="col-md-12" ng-show="errors.length > 1">
         <div ng-repeat="error in errors">
             {{error.message}}
