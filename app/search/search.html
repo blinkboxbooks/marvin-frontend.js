@@ -10,15 +10,15 @@
                 <div ng-show="advancedSearchOpen">
                     <div class="form-group">
                         <label for="bookTitle">Title</label>
-                        <input type="text" class="form-control" placeholder="Wuthering Heights"/>
+                        <input type="text" ng-model="advancedQuery.title" class="form-control" placeholder="Wuthering Heights"/>
                     </div>
                     <div class="form-group">
                         <label for="bookTitle">Publisher</label>
-                        <input type="text" class="form-control" placeholder="Harper Perennial"/>
+                        <input type="text" ng-model="advancedQuery.publisher" class="form-control" placeholder="Harper Perennial"/>
                     </div>
                     <div class="form-group">
                         <label for="bookTitle">Contributors</label>
-                        <input type="text" class="form-control" placeholder="Emily Brontë"/>
+                        <input type="text" ng-model="advancedQuery.contributors" class="form-control" placeholder="Emily Brontë"/>
                     </div>
                 </div>
             </div>
