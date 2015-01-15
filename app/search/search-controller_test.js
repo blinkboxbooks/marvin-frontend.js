@@ -48,6 +48,28 @@ describe('Search controller', function(){
     expect(typeof(IMS.search)).toEqual('function');
   });
 
+  describe('advanced search', function(){
+    it('is closed when we initialise the controller', function(){
+      expect(scope.advancedSearchOpen).toBe(false);
+    });
+
+    it('has empty type in fields', function(){
+      expect(scope.advancedQuery.title).toBe('');
+      expect(scope.advancedQuery.publisher).toBe('');
+      expect(scope.advancedQuery.contributors).toBe('');
+    });
+
+    it('has the correct defaults set for book status', function(){
+      expect(scope.advancedQuery.hasCover).toBe(true);
+      expect(scope.advancedQuery.hasEpub).toBe(true);
+      expect(scope.advancedQuery.hasEpubSample).toBe(true);
+    });
+
+    it('has the correct book status default', function(){
+      expect(scope.advancedQuery.bookStatus).toBe('approved');
+    });
+  });
+
   it('calls the IMS service', function(){
     scope.queryFromForm = 'hello world';
     var deferred = $q.defer();

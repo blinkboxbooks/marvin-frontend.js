@@ -20,6 +20,48 @@
                         <label for="bookTitle">Contributors</label>
                         <input type="text" ng-model="advancedQuery.contributors" class="form-control" placeholder="Emily Brontë"/>
                     </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Approval Status</label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="approved"> Approved
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="rejected"> Rejected
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="pending"> Pending
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="depreciated"> Depreciated
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Has a cover?</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasCover" ng-model="advancedQuery.hasCover" ng-value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasCover" ng-model="advancedQuery.hasCover" ng-value="false"> No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Has an ePub?</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpub" ng-model="advancedQuery.hasEpub" ng-value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpub" ng-model="advancedQuery.hasEpub" ng-value="false"> No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Has an ePub sample?</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpubSample" ng-model="advancedQuery.hasEpubSample" ng-value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpubSample" ng-model="advancedQuery.hasEpubSample" ng-value="false"> No
+                        </label>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>

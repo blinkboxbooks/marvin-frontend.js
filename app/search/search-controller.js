@@ -6,10 +6,15 @@ angular.module('Marvin.Controllers')
       $scope.advancedSearchOpen = false;
 
       $scope.queryFromForm = '';
+
       $scope.advancedQuery = {
         title: '',
         publisher: '',
-        contributors: ''
+        contributors: '',
+        bookStatus: 'approved',
+        hasCover: true,
+        hasEpub: true,
+        hasEpubSample: true
       };
 
       $scope.results = {};
