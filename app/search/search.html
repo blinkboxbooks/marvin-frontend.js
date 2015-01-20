@@ -79,12 +79,12 @@
         <div ng-if="results.items.length > 0">
             <div ng-show="showPager === true">
                 <ul class="pager">
-                    <li ng-show="notFirstPage === true">
+                    <li ng-show="offset >= 50">
                         <a aria-label="Previous" ng-click="previousPage()">
                             <span aria-hidden="true">&laquo; Previous</span>
                         </a>
                     </li>
-                    <li>
+                    <li ng-show="results.lastPage !== true">
                         <a href="#" aria-label="Next" ng-click="nextPage()">
                             <span aria-hidden="true">Next &raquo;</span>
                         </a>
@@ -109,12 +109,12 @@
             </table>
             <div ng-show="showPager === true">
                 <ul class="pager">
-                    <li ng-show="notFirstPage === true">
+                    <li ng-show="offset >= 50">
                         <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo; Previous</span>
                         </a>
                     </li>
-                    <li>
+                    <li ng-show="results.lastPage !== true">
                         <a href="#" aria-label="Next">
                             <span aria-hidden="true">Next &raquo;</span>
                         </a>

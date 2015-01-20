@@ -53,8 +53,6 @@ angular.module('Marvin.Controllers')
           $scope.results = result.data;
 
           $scope.totalResults += $scope.results.items.length;
-
-          $scope.notFirstPage = true;
         }, simpleNetworkError);
       };
 
@@ -65,14 +63,6 @@ angular.module('Marvin.Controllers')
           $scope.results = result.data;
 
           $scope.totalResults -= 50;
-
-          $scope.notFirstPage = true;
         }, simpleNetworkError);
       };
-
-      $scope.$watch('offset', function(current){
-        if (current > 0) {
-//          $scope.
-        }
-      });
 });
