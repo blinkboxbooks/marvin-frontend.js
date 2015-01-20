@@ -46,17 +46,17 @@ angular.module('Marvin.Controllers')
         }, simpleNetworkError);
       };
 
-     $scope.nextPage = function(){
-      $scope.offset = angular.copy($scope.totalResults);
+      $scope.nextPage = function(){
+        $scope.offset = angular.copy($scope.totalResults);
 
-       IMS.search($scope.queryFromForm, 50, $scope.offset).then(function(result){
-         $scope.results = result.data;
+        IMS.search($scope.queryFromForm, 50, $scope.offset).then(function(result){
+          $scope.results = result.data;
 
-         $scope.totalResults += $scope.results.items.length;
+          $scope.totalResults += $scope.results.items.length;
 
-         $scope.notFirstPage = true;
-       }, simpleNetworkError);
-     };
+          $scope.notFirstPage = true;
+        }, simpleNetworkError);
+      };
 
       $scope.previousPage = function(){
         $scope.offset -= 50;
@@ -69,4 +69,10 @@ angular.module('Marvin.Controllers')
           $scope.notFirstPage = true;
         }, simpleNetworkError);
       };
+
+      $scope.$watch('offset', function(current){
+        if (current > 0) {
+//          $scope.
+        }
+      });
 });

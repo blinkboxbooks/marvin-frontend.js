@@ -71,19 +71,19 @@ describe('Search controller', function(){
   });
 
   /**
-   * Sets up spy on IMS.search
-   *
-   * @param deferred Deferred object to make a promise of.
-   */
+  * Sets up spy on IMS.search
+  *
+  * @param deferred Deferred object to make a promise of.
+  */
   function spyOnIMS(deferred){
     spyOn(IMS, 'search').and.returnValue(deferred.promise);
   }
 
   /**
-   * Setup a spy on the IMS.search service which returns data, successfully resolving the promise.
-   *
-   * @param data The data element to return when we return a promise.
-   */
+  * Setup a spy on the IMS.search service which returns data, successfully resolving the promise.
+  *
+  * @param data The data element to return when we return a promise.
+  */
   function spyOnIMSSearchAndReturn(data){
     var deferred = $q.defer();
 
@@ -93,10 +93,10 @@ describe('Search controller', function(){
   }
 
   /**
-   * Setup a spy on the IMS.search service which returns data,  but rejects the promise
-   *
-   * @param data Data to return when we fail to resolve the promise.
-   */
+  * Setup a spy on the IMS.search service which returns data,  but rejects the promise
+  *
+  * @param data Data to return when we fail to resolve the promise.
+  */
   function spyOnIMSSearchAndRejectWith(data){
     var deferred = $q.defer();
 
@@ -126,7 +126,7 @@ describe('Search controller', function(){
       expect(typeof(scope.nextPage)).toBe('function');
     });
 
-    function repeat(n){ var x=[]; var i=1; while(x.push(i++) < 50); return x; }
+    function repeat(){ var x=[]; var i=1; while(x.push(i++) < 50) {} return x; }
 
     describe('next page', function(){
       it('calls IMS for the next page', function(){
