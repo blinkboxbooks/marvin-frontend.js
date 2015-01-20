@@ -155,6 +155,22 @@ describe('Search controller', function(){
         expect(IMS.search.calls.argsFor(2)).toEqual(['hello world', 50, 150]);
       });
 
+      it('adds an error on network failure', function(){
+        scope.queryFromForm = 'hello world';
+        scope.results = {items: repeat(), lastPage: false};
+        scope.totalResults = scope.results.items.length;
+        var error = {message: 'Something went sadly wrong.'};
+
+        spyOnIMSSearchAndRejectWith(error);
+
+        scope.nextPage();
+
+        scope.$apply();
+
+        expect(scope.errors.length).toEqual(1);
+        expect(scope.errors[0]).toEqual(error);
+      });
+
       it('shows the previous page button correctly');
       it('shows the next page button correctly');
     });
@@ -178,6 +194,22 @@ describe('Search controller', function(){
         scope.previousPage();
 
         expect(IMS.search.calls.argsFor(1)).toEqual(['hello world', 50, 0]);
+      });
+
+      it('adds an error on network failure', function(){
+        scope.queryFromForm = 'hello world';
+        scope.results = {items: repeat(), lastPage: false};
+        scope.totalResults = scope.results.items.length;
+        var error = {message: 'Something went sadly wrong.'};
+
+        spyOnIMSSearchAndRejectWith(error);
+
+        scope.previousPage();
+
+        scope.$apply();
+
+        expect(scope.errors.length).toEqual(1);
+        expect(scope.errors[0]).toEqual(error);
       });
 
       it('shows the previous page button correctly');

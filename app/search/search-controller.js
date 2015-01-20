@@ -18,6 +18,7 @@ angular.module('Marvin.Controllers')
         hasEpubSample: true
       };
 
+
       $scope.results = {};
       $scope.totalResults = 0;
       $scope.offset = 0;
@@ -25,6 +26,10 @@ angular.module('Marvin.Controllers')
       $scope.showPager = false;
 
       $scope.errors = [];
+
+      function simpleNetworkError(){
+        $scope.errors.push({message: 'Something went sadly wrong.'});
+      }
 
       $scope.search = function(){
         $scope.resultsOpen = true;
@@ -38,10 +43,7 @@ angular.module('Marvin.Controllers')
           }
 
           $scope.totalResults = $scope.results.items.length;
-        },
-        function(){
-          $scope.errors.push({message: 'Something went sadly wrong.'});
-        });
+        }, simpleNetworkError);
       };
 
      $scope.nextPage = function(){
@@ -53,7 +55,7 @@ angular.module('Marvin.Controllers')
          $scope.totalResults += $scope.results.items.length;
 
          $scope.notFirstPage = true;
-       });
+       }, simpleNetworkError);
      };
 
       $scope.previousPage = function(){
@@ -65,6 +67,6 @@ angular.module('Marvin.Controllers')
           $scope.totalResults -= 50;
 
           $scope.notFirstPage = true;
-        });
+        }, simpleNetworkError);
       };
 });
