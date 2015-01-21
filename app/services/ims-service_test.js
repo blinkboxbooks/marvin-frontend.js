@@ -1,6 +1,7 @@
 'use strict';
 
 describe('IMS service', function(){
+  var $rootScope;
   var $httpBackend;
 
   var IMS;
@@ -9,17 +10,42 @@ describe('IMS service', function(){
 
   beforeEach(module('Marvin.Services', 'Marvin.Constants'));
 
-  beforeEach(inject(function(_IMS_, _$httpBackend_, _SERVICES_){
+  beforeEach(inject(function(_IMS_, _$httpBackend_, _$rootScope_, _SERVICES_){
     $httpBackend = _$httpBackend_;
+    $rootScope = _$rootScope_;
     IMS = _IMS_;
     SERVICES = _SERVICES_;
 
     IMS_SERVICE = SERVICES.IMS;
   }));
 
-  // Stupid test.
   it('returns an object', function(){
     expect(typeof(IMS)).toBe('object');
+  });
+
+  describe('get a book', function(){
+    it('method is there', function(){
+      expect(typeof(IMS.getBook)).toBe('function');
+    });
+
+    it('passes along the book ID correctly', function(){
+      $httpBackend.expect('GET', IMS_SERVICE + '/books/e11cec87-49b4-4ddd-b8a1-bcbeb658d3be').respond(200);
+
+      IMS.getBook('e11cec87-49b4-4ddd-b8a1-bcbeb658d3be');
+      $httpBackend.flush();
+    });
+
+    it('ignores invalid UUIDs for books', function(){
+      var expectedError;
+
+      IMS.getBook('this-is-not-a-uuid-at-all').then(null, function(error){
+        expectedError = error;
+      });
+
+      $rootScope.$digest();
+
+      expect(expectedError).toEqual({message: 'Invalid UUID for book.'});
+    });
   });
 
   describe('search querying', function(){
