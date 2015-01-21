@@ -10,6 +10,8 @@ describe('Search controller', function(){
   var SearchController;
   var IMS;
 
+  var errorMessage;
+
   beforeEach(module('Marvin'));
 
   beforeEach(inject(function(_$controller_, _$rootScope_, _IMS_, _$q_){
@@ -19,6 +21,8 @@ describe('Search controller', function(){
 
     scope = $rootScope.$new();
     IMS = _IMS_;
+
+    errorMessage = 'We couldn\'t retrieve data from IMS, please raise a ticket for the Marvin team to address this issue, more information is in your browser\'s console.';
 
     SearchController = $controller('SearchController', {
       $scope: scope,
@@ -105,6 +109,13 @@ describe('Search controller', function(){
     spyOnIMS(deferred);
   }
 
+  /**
+  * Creates an array with 50 items.
+  *
+  * @returns {Array} Array with 50 items in it.
+  */
+  function repeat(){ var x=[]; var i=1; while(x.push(i++) < 50) {} return x; }
+
   describe('pager', function(){
     it('does not show pager on initialisation', function(){
       expect(scope.showPager).toEqual(false);
@@ -125,8 +136,6 @@ describe('Search controller', function(){
     it('has a method to handle moving forward in the results', function(){
       expect(typeof(scope.nextPage)).toBe('function');
     });
-
-    function repeat(){ var x=[]; var i=1; while(x.push(i++) < 50) {} return x; }
 
     describe('next page', function(){
       it('calls IMS for the next page', function(){
@@ -155,22 +164,6 @@ describe('Search controller', function(){
         expect(IMS.search.calls.argsFor(2)).toEqual(['hello world', 50, 150]);
       });
 
-      it('adds an error on network failure', function(){
-        scope.queryFromForm = 'hello world';
-        scope.results = {items: repeat(), lastPage: false};
-        scope.totalResults = scope.results.items.length;
-        var error = {message: 'Something went sadly wrong.'};
-
-        spyOnIMSSearchAndRejectWith(error);
-
-        scope.nextPage();
-
-        scope.$apply();
-
-        expect(scope.errors.length).toEqual(1);
-        expect(scope.errors[0]).toEqual(error);
-      });
-
       it('shows the previous page button correctly');
       it('shows the next page button correctly');
     });
@@ -194,22 +187,6 @@ describe('Search controller', function(){
         scope.previousPage();
 
         expect(IMS.search.calls.argsFor(1)).toEqual(['hello world', 50, 0]);
-      });
-
-      it('adds an error on network failure', function(){
-        scope.queryFromForm = 'hello world';
-        scope.results = {items: repeat(), lastPage: false};
-        scope.totalResults = scope.results.items.length;
-        var error = {message: 'Something went sadly wrong.'};
-
-        spyOnIMSSearchAndRejectWith(error);
-
-        scope.previousPage();
-
-        scope.$apply();
-
-        expect(scope.errors.length).toEqual(1);
-        expect(scope.errors[0]).toEqual(error);
       });
 
       it('shows the previous page button correctly');
@@ -257,42 +234,93 @@ describe('Search controller', function(){
       expect(scope.errors.length).toEqual(0);
     });
 
-    it('handles errors from the service', function(){
-      scope.queryFromForm = 'a book thing that does not exist';
-      var error = {message: 'Something went sadly wrong.'};
+    describe('error handling', function(){
+      var $log;
+      var fakeResponse;
 
-      spyOnIMSSearchAndRejectWith(error);
+      beforeEach(inject(function(_$log_){
+        $log = _$log_;
 
-      scope.search();
+        spyOn($log, 'error');
 
-      scope.$apply();
+        fakeResponse = {config: 'This is a fake config'};
+      }));
 
-      expect(scope.errors.length).toEqual(1);
-      expect(scope.errors[0]).toEqual(error);
-    });
+      function spyOnIMSWithFakeResponse(){
+        spyOnIMSSearchAndRejectWith(fakeResponse);
+      }
 
-    it('clears errors before making call to IMS service', function(){
-      scope.queryFromForm = 'a book thing that does not exist';
-      var error = {message: 'Something went sadly wrong.'};
+      it('handles errors from the service', function(){
+        scope.queryFromForm = 'a book thing that does not exist';
 
-      // Shunt something onto errors that we are going to clear.
-      scope.errors.push(error);
+        spyOnIMSWithFakeResponse();
 
-      spyOnIMSSearchAndRejectWith(error);
+        scope.search();
 
-      expect(scope.errors.length).toEqual(1);
+        scope.$apply();
 
-      scope.search();
+        expect(scope.errors.length).toEqual(1);
+        expect(scope.errors[0]).toEqual({message: errorMessage});
 
-      expect(scope.errors.length).toEqual(0);
+        expect($log.error).toHaveBeenCalledWith('Error communicating with IMS server', 'This is a fake config');
+      });
 
-      // Now resolve the promise to double check we are covering the right bit of code.
-      scope.$apply();
+      it('clears errors before making call to IMS service', function(){
+        scope.queryFromForm = 'a book thing that does not exist';
+        var error = {message: errorMessage};
 
-      expect(scope.errors.length).toEqual(1);
-      expect(scope.errors[0]).toEqual(error);
+        // Shunt something onto errors that we are going to clear.
+        scope.errors.push(error);
+
+        spyOnIMSWithFakeResponse();
+
+        expect(scope.errors.length).toEqual(1);
+
+        scope.search();
+
+        expect(scope.errors.length).toEqual(0);
+
+        // Now resolve the promise to double check we are covering the right bit of code.
+        scope.$apply();
+
+        expect(scope.errors.length).toEqual(1);
+        expect(scope.errors[0]).toEqual(error);
+
+        expect($log.error).toHaveBeenCalledWith('Error communicating with IMS server', 'This is a fake config');
+      });
+
+      it('adds an error on network failure', function(){
+        scope.queryFromForm = 'hello world';
+        scope.results = {items: repeat(), lastPage: false};
+        scope.totalResults = scope.results.items.length;
+
+        spyOnIMSWithFakeResponse();
+
+        scope.nextPage();
+
+        scope.$apply();
+
+        expect(scope.errors.length).toEqual(1);
+        expect(scope.errors[0]).toEqual({message: errorMessage});
+
+        expect($log.error).toHaveBeenCalledWith('Error communicating with IMS server', 'This is a fake config');
+      });
+
+      it('adds an error on network failure', function(){
+        scope.queryFromForm = 'hello world';
+        scope.results = {items: repeat(), lastPage: false};
+        scope.totalResults = scope.results.items.length;
+
+        spyOnIMSWithFakeResponse();
+
+        scope.previousPage();
+
+        scope.$apply();
+
+        expect(scope.errors.length).toEqual(1);
+        expect(scope.errors[0]).toEqual({message: errorMessage});
+        expect($log.error).toHaveBeenCalledWith('Error communicating with IMS server', 'This is a fake config');
+      });
     });
   });
-
-
 });
