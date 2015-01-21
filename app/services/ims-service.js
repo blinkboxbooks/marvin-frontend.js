@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+* IMS Service
+*
+* Interacts with the IMS service
+*/
 angular.module('Marvin.Services')
   .factory('IMS', function($http, SERVICES, $q){
   var url = SERVICES.IMS;
@@ -32,7 +37,7 @@ angular.module('Marvin.Services')
   * @param query A valid Lucene query against the database.
   * @param count The number of results to be returned.
   * @param offset The offset.
-  * @returns {HttpPromise}
+  * @returns {HttpPromise} A promise for the search.
   */
   function search(query, count, offset){
     var paramString = [];
@@ -50,6 +55,12 @@ angular.module('Marvin.Services')
     return $http.get(url + '/search?' + paramString.join('&'));
   }
 
+  /**
+  * Gets a book from IMS.
+  *
+  * @param uuid A valid UUID of a book to locate.
+  * @returns {Promise} A promise for the HTTP or a rejection if the UUID is wrong.
+  */
   function getBook(uuid){
     if (! validUUID(uuid)) {
       return errorPromise('Invalid UUID for book.');
