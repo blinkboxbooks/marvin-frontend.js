@@ -1,0 +1,126 @@
+<div class="row" ng-controller="SearchController">
+    <div class="col-md-12">
+        <form ng-submit="search()" class="form">
+            <div class="form-group">
+                <label for="query">Search</label>
+                <input type="text" ng-model="queryFromForm" class="form-control" placeholder="Query...">
+            </div>
+            <div>
+                <a ng-click="(advancedSearchOpen === true) ? advancedSearchOpen = false : advancedSearchOpen = true"><i class="fa" ng-class="(advancedSearchOpen === true) ? 'fa-angle-up' : 'fa-angle-down';"></i> Advanced Search</a>
+                <div ng-show="advancedSearchOpen">
+                    <div class="form-group">
+                        <label for="bookTitle">Title</label>
+                        <input type="text" ng-model="advancedQuery.title" class="form-control" placeholder="Wuthering Heights"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Publisher</label>
+                        <input type="text" ng-model="advancedQuery.publisher" class="form-control" placeholder="Harper Perennial"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Contributors</label>
+                        <input type="text" ng-model="advancedQuery.contributors" class="form-control" placeholder="Emily Brontë"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Approval Status</label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="approved"> Approved
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="rejected"> Rejected
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="pending"> Pending
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="advancedQuery.bookStatus" value="depreciated"> Depreciated
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Has a cover?</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasCover" ng-model="advancedQuery.hasCover" ng-value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasCover" ng-model="advancedQuery.hasCover" ng-value="false"> No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Has an ePub?</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpub" ng-model="advancedQuery.hasEpub" ng-value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpub" ng-model="advancedQuery.hasEpub" ng-value="false"> No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookTitle">Has an ePub sample?</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpubSample" ng-model="advancedQuery.hasEpubSample" ng-value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="hasEpubSample" ng-model="advancedQuery.hasEpubSample" ng-value="false"> No
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
+        </form>
+    </div>
+    <div class="col-md-12" ng-show="errors.length > 0">
+        <div ng-repeat="error in errors">
+            {{error.message}}
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="resultsOpen">
+        <div ng-if="results.items.length === 0">
+            No results.
+        </div>
+        <div ng-if="results.items.length > 0">
+            <div ng-show="showPager === true">
+                <ul class="pager">
+                    <li ng-show="offset >= 50">
+                        <a aria-label="Previous" ng-click="previousPage()">
+                            <span aria-hidden="true">&laquo; Previous</span>
+                        </a>
+                    </li>
+                    <li ng-show="results.lastPage !== true">
+                        <a href="#" aria-label="Next" ng-click="nextPage()">
+                            <span aria-hidden="true">Next &raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Contributors</th>
+                <th>Publisher</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in results.items">
+                    <td>{{item.classification[0].id}}</td>
+                    <td>{{item.title}}</td>
+                    <td></td>
+                    <td>{{item.publisher}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div ng-show="showPager === true">
+                <ul class="pager">
+                    <li ng-show="offset >= 50">
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo; Previous</span>
+                        </a>
+                    </li>
+                    <li ng-show="results.lastPage !== true">
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">Next &raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
