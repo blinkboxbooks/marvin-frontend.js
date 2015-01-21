@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Marvin.Controllers')
-  .controller('SearchController', function(IMS, $scope){
+  .controller('SearchController', function(IMS, $scope, $log){
       $scope.resultsOpen = false;
       $scope.advancedSearchOpen = false;
       $scope.notFirstPage = false;
@@ -27,8 +27,9 @@ angular.module('Marvin.Controllers')
 
       $scope.errors = [];
 
-      function simpleNetworkError(){
-        $scope.errors.push({message: 'Something went sadly wrong.'});
+      function simpleNetworkError(response){
+        $scope.errors.push({message: 'We couldn\'t retrieve data from IMS, please raise a ticket for the Marvin team to address this issue, more information is in your browser\'s console.'});
+        $log.error('Error communicating with IMS server', response.config);
       }
 
       $scope.search = function(){
