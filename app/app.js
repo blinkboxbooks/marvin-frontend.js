@@ -10,6 +10,10 @@ angular.module('Marvin', ['ngRoute', 'Marvin.Services', 'Marvin.Controllers', 'M
             controller: 'SearchController',
             templateUrl: 'app/search/search.html'
           })
+          .when('/book/:book', {
+            controller: 'BookController',
+            templateUrl: 'app/book/template.html'
+          })
           .otherwise({
             redirectTo: '/'
           });
