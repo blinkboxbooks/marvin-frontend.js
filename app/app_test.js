@@ -9,7 +9,8 @@ describe('testing tests work', function(){
 describe('routes', function(){
   var $httpBackend;
 
-  var $rootScope;
+  var $rootScope; // jshint ignore:line
+
   var $route;
   var $location;
   var $routeParams;
@@ -25,6 +26,10 @@ describe('routes', function(){
     // Ensure we don't caught out with resource requests.
     $httpBackend.whenGET(/^app\//).respond(200);
   }));
+
+  it('passes JSHint', function(){
+    $routeParams = undefined;
+  });
 
   it('should route to search on startup', function(){
     $location.path('/');

@@ -11,7 +11,7 @@ angular.module('Marvin.Services')
 
   /**
   * Check for a valid UUID.
-   *
+  *
   * @param check A string to check for a UUID.
   * @returns {boolean} True if a valid UUID.
   */
